@@ -14,35 +14,39 @@ public class EmployeeService {
 	@Autowired
 	EmployeeDao employeeDao;
 	
+		
+	// This method calling Dao method using JPA
 	public List<Employee> getAllEmployee() {
 		return employeeDao.getAllEmployee();
 	}
 	
-	
-	public String storeEmployee(Employee emp) {
-		if (employeeDao.storeEmployeeRecord(emp)) {
-			return "Stored";
-		} else {
-			return "didn't store";
 
+	
+	public String storeEmployeeRecord(Employee emp) {
+		if(employeeDao.storeEmployeeRecord(emp)) {
+			return "Stored successfully";
+		}else {
+			return "Didn't store";
 		}
 	}
 	
-	public String updateEmployee(Employee emp) {
-		if (employeeDao.updateEmployeeRecord(emp)>0) {
-			return "Updated";
-		} else {
-			return "didn't update";
-
+	public String updateEmployeeRecords(Employee emp) {
+		if(employeeDao.updateEmployeeRecord(emp)>0) {
+			return "Record updated successfully";
+		}else {
+			return "Record didn't update";
 		}
 	}
 	
-	public String deleteEmployee(int id) {
-		if (employeeDao.deleteEmployeeRecord(id)>0) {
-			return "Deleted";
-		} else {
-			return "didn't delete";
-
+	public String deleteEmployeeRecords(int id) {
+		if(employeeDao.deleteEmployeeRecord(id)>0) {
+			return "Record deleted successfully";
+		}else {
+			return "Record not present";
 		}
+	}
+	
+	public Employee findEmployee(int id) {
+		return employeeDao.findEmployeeUsingId(id);
 	}
 }

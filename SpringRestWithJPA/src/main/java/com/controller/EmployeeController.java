@@ -19,27 +19,34 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;
 	
+	// http://localhost:9090/employees
 	@RequestMapping(value = "employees",method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Employee> getAllEmployee() {
 		return employeeService.getAllEmployee();
 	}
+	// http://localhost:9090/storeEmployee
 	
 	@RequestMapping(value = "storeEmployee",method = RequestMethod.POST,
-			consumes =   MediaType.APPLICATION_JSON_VALUE)
+			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String storeEmployee(@RequestBody Employee emp) {
-		return employeeService.storeEmployee(emp);
+		return employeeService.storeEmployeeRecord(emp);
 	}
-
+	// http://localhost:9090/updateEmployee
 	@RequestMapping(value = "updateEmployee",method = RequestMethod.PUT,
-			consumes =   MediaType.APPLICATION_JSON_VALUE)
+			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String updateEmployee(@RequestBody Employee emp) {
-		return employeeService.updateEmployee(emp);
+		return employeeService.updateEmployeeRecords(emp);
 	}
 	
+	// http://localhost:9090/deleteEmployee/100
 	@RequestMapping(value = "deleteEmployee/{id}",method = RequestMethod.DELETE)
-	public String updateEmployee(@PathVariable("id") int id) {
-		return employeeService.deleteEmployee(id);
+	public String deleteEmployeeRecord(@PathVariable("id") int empId) {
+		return employeeService.deleteEmployeeRecords(empId);
 	}
-	
+	// http://localhost:9090/findEmployee/101
+	@RequestMapping(value = "findEmployee/{id}",method = RequestMethod.GET)
+	public Employee findEmployeeRecordById(@PathVariable("id") int empId) {
+		return employeeService.findEmployee(empId);
+	}
 }
